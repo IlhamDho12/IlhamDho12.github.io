@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Redho Ilhamdi - IT Professional | Sistem Informasi UIN Raden Fatah Palembang. Spesialis AI, Data Analytics, dan IT Support.">
+    <meta name="keywords" content="Redho Ilhamdi, IT, Portfolio, Sistem Informasi, UIN Raden Fatah, AI Agent, Data Analytics">
+    <meta name="author" content="Redho Ilhamdi">
+    <title>Redho Ilhamdi | IT Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cursor glow effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Particle background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>RI<span class="logo-bracket">/&gt;</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge animate-on-scroll">
+                <span class="badge-dot"></span>
+                Available for opportunities
+            </div>
+            <h1 class="hero-title animate-on-scroll">
+                <span class="hero-greeting">Hello, I'm</span>
+                <span class="hero-name">Redho Ilhamdi</span>
+                <span class="hero-role" id="typedRole"></span>
+            </h1>
+            <p class="hero-description animate-on-scroll">
+                Mahasiswa Sistem Informasi di <strong>UIN Raden Fatah Palembang</strong> dengan passion di bidang 
+                <span class="text-gradient">Artificial Intelligence</span>, 
+                <span class="text-gradient">Data Analytics</span>, dan 
+                <span class="text-gradient">IT Infrastructure</span>.
+            </p>
+            <div class="hero-cta animate-on-scroll">
+                <a href="#projects" class="btn btn-primary">
+                    <span>Lihat Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <span>Hubungi Saya</span>
+                    <i class="fas fa-paper-plane"></i>
+                </a>
+            </div>
+            <div class="hero-stats animate-on-scroll">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Sertifikasi</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2">0</span>
+                    <span class="stat-label">Pengalaman Kerja</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual animate-on-scroll">
+            <div class="hero-avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <div class="avatar-ring ring-2"></div>
+                <div class="avatar-placeholder">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <!-- Floating tech icons -->
+                <div class="floating-icon fi-1"><i class="fas fa-brain"></i></div>
+                <div class="floating-icon fi-2"><i class="fas fa-database"></i></div>
+                <div class="floating-icon fi-3"><i class="fas fa-code"></i></div>
+                <div class="floating-icon fi-4"><i class="fas fa-server"></i></div>
+                <div class="floating-icon fi-5"><i class="fas fa-network-wired"></i></div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-user"></i> Tentang Saya</span>
+                <h2 class="section-title">Get to Know Me</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-content animate-on-scroll">
+                    <p class="about-text">
+                        Saya adalah mahasiswa <strong>Sistem Informasi</strong> di UIN Raden Fatah Palembang 
+                        dengan IPK <strong>3.26</strong>. Saya memiliki ketertarikan mendalam di bidang teknologi informasi, 
+                        khususnya dalam <em>Artificial Intelligence</em>, <em>Data Analytics</em>, dan <em>IT Infrastructure</em>.
+                    </p>
+                    <p class="about-text">
+                        Dengan pengalaman sebagai IT Trainee dan IT Support, saya telah mengembangkan 
+                        kemampuan teknis dan problem-solving yang kuat. Saya juga aktif mengikuti pelatihan 
+                        dan sertifikasi dari berbagai platform global untuk terus meningkatkan kompetensi.
+                    </p>
+                    <div class="about-info-grid">
+                        <div class="info-card">
+                            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="info-details">
+                                <span class="info-label">Pendidikan</span>
+                                <span class="info-value">Sistem Informasi</span>
+                                <span class="info-sub">UIN Raden Fatah Palembang</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="fas fa-star"></i></div>
+                            <div class="info-details">
+                                <span class="info-label">IPK</span>
+                                <span class="info-value">3.26 / 4.00</span>
+                                <span class="info-sub">Cumulative GPA</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="fas fa-language"></i></div>
+                            <div class="info-details">
+                                <span class="info-label">Bahasa</span>
+                                <span class="info-value">Indonesia & English</span>
+                                <span class="info-sub">Native / Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="info-details">
+                                <span class="info-label">Lokasi</span>
+                                <span class="info-value">Sumatera Selatan</span>
+                                <span class="info-sub">Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-languages animate-on-scroll">
+                    <h3 class="lang-title">Language Proficiency</h3>
+                    <div class="lang-item">
+                        <div class="lang-header">
+                            <span class="lang-name">🇮🇩 Bahasa Indonesia</span>
+                            <span class="lang-level">Native</span>
+                        </div>
+                        <div class="lang-bar">
+                            <div class="lang-fill" data-width="100"></div>
+                        </div>
+                    </div>
+                    <div class="lang-item">
+                        <div class="lang-header">
+                            <span class="lang-name">🇬🇧 English</span>
+                            <span class="lang-level">Intermediate</span>
+                        </div>
+                        <div class="lang-bar">
+                            <div class="lang-fill" data-width="60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section section-alt" id="experience">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-briefcase"></i> Pengalaman</span>
+                <h2 class="section-title">Work Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3 class="timeline-title">IT Trainee</h3>
+                                <span class="timeline-company">Radisson Lampung Kedaton</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Pengalaman Profesional</span>
+                                <span><i class="fas fa-map-pin"></i> Lampung, Indonesia</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li>Mengelola dan memelihara infrastruktur IT hotel</li>
+                                <li>Troubleshooting hardware dan software untuk operasional hotel</li>
+                                <li>Menangani jaringan dan sistem keamanan IT</li>
+                                <li>Berkolaborasi dengan tim untuk optimasi sistem</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span class="tag">IT Infrastructure</span>
+                                <span class="tag">Networking</span>
+                                <span class="tag">Troubleshooting</span>
+                                <span class="tag">Hospitality Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-badge badge-blue">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3 class="timeline-title">IT Support (Intern)</h3>
+                                <span class="timeline-company">BNN Sumatera Selatan</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Program Magang</span>
+                                <span><i class="fas fa-map-pin"></i> Palembang, Indonesia</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li>Memberikan dukungan teknis IT untuk operasional kantor</li>
+                                <li>Maintenance dan instalasi perangkat keras & lunak</li>
+                                <li>Mengelola jaringan lokal dan konektivitas internet</li>
+                                <li>Dokumentasi dan pelaporan sistem IT</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span class="tag">IT Support</span>
+                                <span class="tag">Hardware</span>
+                                <span class="tag">Software</span>
+                                <span class="tag">Government IT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-rocket"></i> Projects</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card project-featured animate-on-scroll">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link-btn" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">AI Agent Data Analysis</h3>
+                    <p class="project-desc">
+                        Agen AI cerdas yang mampu melakukan analisis data secara otomatis. 
+                        Menggunakan teknologi AI modern untuk mengekstrak insight dari dataset, 
+                        melakukan visualisasi, dan memberikan rekomendasi berbasis data.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">LangFlow</span>
+                        <span class="tech-pill">AI/ML</span>
+                        <span class="tech-pill">LangChain</span>
+                        <span class="tech-pill">Data Analytics</span>
+                    </div>
+                    <div class="project-status">
+                        <span class="status-dot active"></span>
+                        <span>Active Development</span>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon icon-purple">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link-btn" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">CV Information Extraction</h3>
+                    <p class="project-desc">
+                        Sistem ekstraksi informasi otomatis dari CV/Resume menggunakan 
+                        AI dan NLP. Mampu mengidentifikasi dan mengekstrak data penting 
+                        seperti nama, pengalaman, skill, dan pendidikan secara akurat.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-pill">LangFlow</span>
+                        <span class="tech-pill">NLP</span>
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">AI Extraction</span>
+                    </div>
+                    <div class="project-status">
+                        <span class="status-dot active"></span>
+                        <span>Active Development</span>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon icon-green">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Portfolio Website</h3>
+                    <p class="project-desc">
+                        Website portfolio personal yang dibangun dengan desain modern, 
+                        animasi yang halus, dan performa yang optimal. Menampilkan 
+                        seluruh karya dan pencapaian profesional.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-pill">HTML5</span>
+                        <span class="tech-pill">CSS3</span>
+                        <span class="tech-pill">JavaScript</span>
+                        <span class="tech-pill">GitHub Pages</span>
+                    </div>
+                    <div class="project-status">
+                        <span class="status-dot completed"></span>
+                        <span>Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section section-alt" id="certifications">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-certificate"></i> Sertifikasi</span>
+                <h2 class="section-title">Certifications & Training</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card animate-on-scroll">
+                    <div class="cert-logo">
+                        <i class="fab fa-cisco" style="color: #049fd9;"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Cisco Networking Academy</h3>
+                        <p class="cert-issuer">Cisco</p>
+                        <p class="cert-desc">Pelatihan jaringan komputer dan keamanan siber dari Cisco Networking Academy</p>
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified</span>
+                    </div>
+                </div>
+
+                <div class="cert-card animate-on-scroll">
+                    <div class="cert-logo">
+                        <i class="fab fa-ibm" style="color: #0f62fe;"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">IBM Professional Certificate</h3>
+                        <p class="cert-issuer">IBM</p>
+                        <p class="cert-desc">Sertifikasi profesional dari IBM dalam bidang teknologi dan data</p>
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified</span>
+                    </div>
+                </div>
+
+                <div class="cert-card animate-on-scroll">
+                    <div class="cert-logo cert-logo-text">
+                        <span style="color: #2d9cdb; font-weight: 800; font-size: 1.5rem;">D</span>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Dicoding Academy</h3>
+                        <p class="cert-issuer">Dicoding Indonesia</p>
+                        <p class="cert-desc">Pelatihan pengembangan software dan teknologi dari platform Dicoding Indonesia</p>
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified</span>
+                    </div>
+                </div>
+
+                <div class="cert-card animate-on-scroll">
+                    <div class="cert-logo">
+                        <i class="fas fa-database" style="color: #f80000;"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Oracle Certification</h3>
+                        <p class="cert-issuer">Oracle</p>
+                        <p class="cert-desc">Sertifikasi dari Oracle dalam bidang database dan cloud technology</p>
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified</span>
+                    </div>
+                </div>
+
+                <div class="cert-card animate-on-scroll">
+                    <div class="cert-logo cert-logo-text">
+                        <span style="color: #ffc107; font-weight: 800; font-size: 1.4rem;">H8</span>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Hacktiv8 Training</h3>
+                        <p class="cert-issuer">Hacktiv8</p>
+                        <p class="cert-desc">Program pelatihan intensif dari Hacktiv8 dalam bidang teknologi dan programming</p>
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-tools"></i> Skills</span>
+                <h2 class="section-title">Technical Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
+                        <h3>AI & Data</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Agent Development</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Data Analytics</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>LangFlow</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-link"></i>
+                            <span>LangChain</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-file-alt"></i>
+                            <span>NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon icon-blue"><i class="fas fa-code"></i></div>
+                        <h3>Programming</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-database"></i>
+                            <span>SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon icon-green"><i class="fas fa-server"></i></div>
+                        <h3>IT Infrastructure</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Networking</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-desktop"></i>
+                            <span>IT Support</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-tools"></i>
+                            <span>Troubleshooting</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-hdd"></i>
+                            <span>Hardware</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Cybersecurity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon icon-orange"><i class="fas fa-cubes"></i></div>
+                        <h3>Tools & Platform</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-linux"></i>
+                            <span>Linux</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-windows"></i>
+                            <span>Windows Server</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fas fa-cloud"></i>
+                            <span>Cloud Services</span>
+                        </div>
+                        <div class="skill-chip">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-alt" id="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag"><i class="fas fa-envelope"></i> Kontak</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Tertarik untuk berkolaborasi atau ingin tahu lebih lanjut? Jangan ragu untuk menghubungi saya.</p>
+            </div>
+            <div class="contact-grid animate-on-scroll">
+                <a href="mailto:redhoilhamdi@gmail.com" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>redhoilhamdi@gmail.com</p>
+                </a>
+                <a href="https://github.com/ilhamdho12" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p>github.com/ilhamdho12</p>
+                </a>
+                <a href="https://linkedin.com/in/ilhamdho12" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p>linkedin.com/in/ilhamdho12</p>
+                </a>
+                <a href="https://instagram.com/ilhamdho12" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>@ilhamdho12</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-bracket">&lt;</span>RI<span class="logo-bracket">/&gt;</span>
+                </div>
+                <p class="footer-text">
+                    Designed & Built by <strong>Redho Ilhamdi</strong>
+                </p>
+                <div class="footer-social">
+                    <a href="https://github.com/ilhamdho12" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/ilhamdho12" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/ilhamdho12" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2026 Redho Ilhamdi. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
