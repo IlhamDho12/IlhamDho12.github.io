@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,181 +7,218 @@
     <meta name="keywords" content="Redho Ilhamdi, IT, Portfolio, Sistem Informasi, UIN Raden Fatah, AI Agent, Data Analytics">
     <meta name="author" content="Redho Ilhamdi">
     <title>Redho Ilhamdi | IT Portfolio</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            indigo: '#6c63ff',
+                            cyan: '#00d2ff',
+                            purple: '#7928ca',
+                            green: '#00c896',
+                            orange: '#ff6b35',
+                            pink: '#ff0080',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom style containing animations, particle setup, and timeline states -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-[#0a0a0f] text-[#f0f0f5] font-sans antialiased overflow-x-hidden relative">
     <!-- Cursor glow effect -->
-    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-glow fixed rounded-full pointer-events-none z-0 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(108,99,255,0.06)_0%,transparent_70%)]" id="cursorGlow"></div>
 
     <!-- Particle background -->
-    <canvas id="particleCanvas"></canvas>
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <span class="logo-bracket">&lt;</span>RI<span class="logo-bracket">/&gt;</span>
+    <nav class="navbar fixed top-0 left-0 right-0 z-[1000] py-4 transition-all duration-500 bg-transparent" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+            <a href="#hero" class="nav-logo font-mono text-2xl font-bold tracking-tight transition-transform duration-200 hover:scale-105">
+                <span class="text-brand-indigo">&lt;</span>RI<span class="text-brand-indigo">/&gt;</span>
             </a>
-            <div class="nav-menu" id="navMenu">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <div class="nav-menu hidden md:flex items-center gap-2" id="navMenu">
+                <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">About</a>
+                <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">Experience</a>
+                <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">Projects</a>
+                <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">Certifications</a>
+                <a href="#skills" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">Skills</a>
+                <a href="#contact" class="nav-link px-4 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white rounded-lg transition-colors duration-200">Contact</a>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="nav-toggle md:hidden relative flex flex-col justify-between w-6 h-4 bg-transparent border-0 cursor-pointer outline-none z-[1001]" id="navToggle" aria-label="Toggle menu">
+                <span class="w-full h-[2px] bg-[#f0f0f5] rounded transition-transform duration-300"></span>
+                <span class="w-full h-[2px] bg-[#f0f0f5] rounded transition-opacity duration-300"></span>
+                <span class="w-full h-[2px] bg-[#f0f0f5] rounded transition-transform duration-300"></span>
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge animate-on-scroll">
-                <span class="badge-dot"></span>
-                Available for opportunities
-            </div>
-            <h1 class="hero-title animate-on-scroll">
-                <span class="hero-greeting">Hello, I'm</span>
-                <span class="hero-name">Redho Ilhamdi</span>
-                <span class="hero-role" id="typedRole"></span>
-            </h1>
-            <p class="hero-description animate-on-scroll">
-                Mahasiswa Sistem Informasi di <strong>UIN Raden Fatah Palembang</strong> dengan passion di bidang 
-                <span class="text-gradient">Artificial Intelligence</span>, 
-                <span class="text-gradient">Data Analytics</span>, dan 
-                <span class="text-gradient">IT Infrastructure</span>.
-            </p>
-            <div class="hero-cta animate-on-scroll">
-                <a href="#projects" class="btn btn-primary">
-                    <span>Lihat Projects</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <span>Hubungi Saya</span>
-                    <i class="fas fa-paper-plane"></i>
-                </a>
-            </div>
-            <div class="hero-stats animate-on-scroll">
-                <div class="stat-item">
-                    <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Sertifikasi</span>
+    <section class="hero min-h-screen relative flex items-center pt-24 pb-12 px-6 z-10" id="hero">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="hero-content lg:col-span-7 text-center lg:text-left">
+                <div class="hero-badge animate-on-scroll inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-6 tracking-wide">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Available for opportunities
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="2">0</span>
-                    <span class="stat-label">Pengalaman Kerja</span>
+                <h1 class="hero-title animate-on-scroll text-4xl md:text-6xl font-black tracking-tight leading-tight mb-6">
+                    <span class="block text-2xl md:text-3xl font-medium text-[#a0a0b8] mb-2">Hello, I'm</span>
+                    <span class="block text-white mb-2">Redho Ilhamdi</span>
+                    <span class="block bg-gradient-to-r from-brand-indigo to-brand-cyan bg-clip-text text-transparent font-mono text-2xl md:text-4xl" id="typedRole"></span>
+                </h1>
+                <p class="hero-description animate-on-scroll text-base md:text-lg text-[#a0a0b8] mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Mahasiswa Sistem Informasi di <strong>UIN Raden Fatah Palembang</strong> dengan passion di bidang 
+                    <span class="text-transparent bg-gradient-to-r from-brand-indigo to-brand-cyan bg-clip-text font-semibold">Artificial Intelligence</span>, 
+                    <span class="text-transparent bg-gradient-to-r from-brand-cyan to-brand-green bg-clip-text font-semibold">Data Analytics</span>, dan 
+                    <span class="text-transparent bg-gradient-to-r from-brand-indigo to-brand-pink bg-clip-text font-semibold">IT Infrastructure</span>.
+                </p>
+                <div class="hero-cta animate-on-scroll flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+                    <a href="#projects" class="btn btn-primary px-8 py-4 bg-gradient-to-r from-brand-indigo to-brand-cyan text-white font-bold rounded-xl shadow-lg hover:shadow-brand-indigo/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-2">
+                        <span>Lihat Projects</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-2">
+                        <span>Hubungi Saya</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </a>
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Projects</span>
+                <div class="hero-stats animate-on-scroll flex items-center justify-center lg:justify-start gap-8">
+                    <div class="stat-item text-center lg:text-left">
+                        <span class="stat-number text-3xl font-extrabold text-white" data-count="5">0</span><span class="text-brand-indigo text-xl font-bold">+</span>
+                        <span class="block text-xs text-[#6a6a82] uppercase tracking-wider mt-1">Sertifikasi</span>
+                    </div>
+                    <div class="h-8 w-px bg-white/10"></div>
+                    <div class="stat-item text-center lg:text-left">
+                        <span class="stat-number text-3xl font-extrabold text-white" data-count="2">0</span>
+                        <span class="block text-xs text-[#6a6a82] uppercase tracking-wider mt-1">Pengalaman Kerja</span>
+                    </div>
+                    <div class="h-8 w-px bg-white/10"></div>
+                    <div class="stat-item text-center lg:text-left">
+                        <span class="stat-number text-3xl font-extrabold text-white" data-count="3">0</span><span class="text-brand-indigo text-xl font-bold">+</span>
+                        <span class="block text-xs text-[#6a6a82] uppercase tracking-wider mt-1">Projects</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual lg:col-span-5 flex justify-center items-center relative z-20 animate-on-scroll">
+                <div class="hero-avatar-wrapper relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+                    <div class="avatar-ring absolute inset-0 rounded-full border border-brand-indigo/30 animate-pulse"></div>
+                    <div class="avatar-ring ring-2 absolute -inset-4 rounded-full border border-brand-cyan/20 animate-ping" style="animation-duration: 3s;"></div>
+                    <div class="avatar-placeholder w-48 h-48 md:w-60 md:h-60 rounded-full bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-2xl relative z-10">
+                        <i class="fas fa-user-astronaut text-6xl text-white"></i>
+                    </div>
+                    <!-- Floating tech icons -->
+                    <div class="floating-icon fi-1 absolute top-4 left-4 bg-white/5 border border-white/10 w-12 h-12 rounded-xl flex items-center justify-center text-brand-indigo text-xl shadow-lg shadow-black/20"><i class="fas fa-brain"></i></div>
+                    <div class="floating-icon fi-2 absolute top-12 right-4 bg-white/5 border border-white/10 w-12 h-12 rounded-xl flex items-center justify-center text-brand-cyan text-xl shadow-lg shadow-black/20"><i class="fas fa-database"></i></div>
+                    <div class="floating-icon fi-3 absolute bottom-12 left-0 bg-white/5 border border-white/10 w-12 h-12 rounded-xl flex items-center justify-center text-brand-pink text-xl shadow-lg shadow-black/20"><i class="fas fa-code"></i></div>
+                    <div class="floating-icon fi-4 absolute bottom-8 right-8 bg-white/5 border border-white/10 w-12 h-12 rounded-xl flex items-center justify-center text-brand-green text-xl shadow-lg shadow-black/20"><i class="fas fa-server"></i></div>
                 </div>
             </div>
         </div>
-        <div class="hero-visual animate-on-scroll">
-            <div class="hero-avatar-wrapper">
-                <div class="avatar-ring"></div>
-                <div class="avatar-ring ring-2"></div>
-                <div class="avatar-placeholder">
-                    <i class="fas fa-user-astronaut"></i>
-                </div>
-                <!-- Floating tech icons -->
-                <div class="floating-icon fi-1"><i class="fas fa-brain"></i></div>
-                <div class="floating-icon fi-2"><i class="fas fa-database"></i></div>
-                <div class="floating-icon fi-3"><i class="fas fa-code"></i></div>
-                <div class="floating-icon fi-4"><i class="fas fa-server"></i></div>
-                <div class="floating-icon fi-5"><i class="fas fa-network-wired"></i></div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
+        <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs text-[#6a6a82] uppercase tracking-widest cursor-pointer transition-colors duration-300 hover:text-white">
+            <div class="scroll-mouse w-6 h-10 rounded-full border border-[#6a6a82] flex justify-center p-1.5">
+                <div class="scroll-wheel w-1.5 h-3 bg-brand-indigo rounded-full animate-bounce"></div>
             </div>
             <span>Scroll Down</span>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-user"></i> Tentang Saya</span>
-                <h2 class="section-title">Get to Know Me</h2>
+    <section class="section relative py-24 px-6 z-10" id="about">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center md:text-left">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-indigo/10 border border-brand-indigo/20 text-xs font-bold text-brand-indigo tracking-wider uppercase mb-3">
+                    <i class="fas fa-user"></i> Tentang Saya
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Get to Know Me</h2>
             </div>
-            <div class="about-grid">
-                <div class="about-content animate-on-scroll">
-                    <p class="about-text">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="about-content lg:col-span-7 animate-on-scroll">
+                    <p class="about-text text-base md:text-lg text-[#a0a0b8] leading-relaxed mb-6">
                         Saya adalah mahasiswa <strong>Sistem Informasi</strong> di UIN Raden Fatah Palembang 
                         dengan IPK <strong>3.26</strong>. Saya memiliki ketertarikan mendalam di bidang teknologi informasi, 
                         khususnya dalam <em>Artificial Intelligence</em>, <em>Data Analytics</em>, dan <em>IT Infrastructure</em>.
                     </p>
-                    <p class="about-text">
+                    <p class="about-text text-base md:text-lg text-[#a0a0b8] leading-relaxed mb-10">
                         Dengan pengalaman sebagai IT Trainee dan IT Support, saya telah mengembangkan 
                         kemampuan teknis dan problem-solving yang kuat. Saya juga aktif mengikuti pelatihan 
                         dan sertifikasi dari berbagai platform global untuk terus meningkatkan kompetensi.
                     </p>
-                    <div class="about-info-grid">
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="info-details">
-                                <span class="info-label">Pendidikan</span>
-                                <span class="info-value">Sistem Informasi</span>
-                                <span class="info-sub">UIN Raden Fatah Palembang</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="info-card bg-white/[0.02] border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                            <div class="info-icon w-12 h-12 bg-indigo-500/10 border border-indigo-500/25 text-brand-indigo rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-graduation-cap"></i></div>
+                            <div>
+                                <span class="block text-xs text-[#6a6a82] uppercase tracking-wider">Pendidikan</span>
+                                <span class="block text-sm font-bold text-white mt-0.5">Sistem Informasi</span>
+                                <span class="block text-xs text-[#a0a0b8] font-light">UIN Raden Fatah Palembang</span>
                             </div>
                         </div>
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-star"></i></div>
-                            <div class="info-details">
-                                <span class="info-label">IPK</span>
-                                <span class="info-value">3.26 / 4.00</span>
-                                <span class="info-sub">Cumulative GPA</span>
+                        <div class="info-card bg-white/[0.02] border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                            <div class="info-icon w-12 h-12 bg-cyan-500/10 border border-cyan-500/25 text-brand-cyan rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-star"></i></div>
+                            <div>
+                                <span class="block text-xs text-[#6a6a82] uppercase tracking-wider">IPK</span>
+                                <span class="block text-sm font-bold text-white mt-0.5">3.26 / 4.00</span>
+                                <span class="block text-xs text-[#a0a0b8] font-light">Cumulative GPA</span>
                             </div>
                         </div>
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-language"></i></div>
-                            <div class="info-details">
-                                <span class="info-label">Bahasa</span>
-                                <span class="info-value">Indonesia & English</span>
-                                <span class="info-sub">Native / Intermediate</span>
+                        <div class="info-card bg-white/[0.02] border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                            <div class="info-icon w-12 h-12 bg-pink-500/10 border border-pink-500/25 text-brand-pink rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-language"></i></div>
+                            <div>
+                                <span class="block text-xs text-[#6a6a82] uppercase tracking-wider">Bahasa</span>
+                                <span class="block text-sm font-bold text-white mt-0.5">Indonesia & English</span>
+                                <span class="block text-xs text-[#a0a0b8] font-light">Native / Intermediate</span>
                             </div>
                         </div>
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="info-details">
-                                <span class="info-label">Lokasi</span>
-                                <span class="info-value">Sumatera Selatan</span>
-                                <span class="info-sub">Indonesia</span>
+                        <div class="info-card bg-white/[0.02] border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                            <div class="info-icon w-12 h-12 bg-green-500/10 border border-green-500/25 text-brand-green rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <span class="block text-xs text-[#6a6a82] uppercase tracking-wider">Lokasi</span>
+                                <span class="block text-sm font-bold text-white mt-0.5">Sumatera Selatan</span>
+                                <span class="block text-xs text-[#a0a0b8] font-light">Indonesia</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="about-languages animate-on-scroll">
-                    <h3 class="lang-title">Language Proficiency</h3>
-                    <div class="lang-item">
-                        <div class="lang-header">
-                            <span class="lang-name">🇮🇩 Bahasa Indonesia</span>
-                            <span class="lang-level">Native</span>
+                <div class="about-languages lg:col-span-5 animate-on-scroll bg-white/[0.02] border border-white/5 p-8 rounded-3xl h-fit">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2"><i class="fas fa-globe text-brand-cyan"></i> Language Proficiency</h3>
+                    <div class="space-y-6">
+                        <div class="lang-item">
+                            <div class="flex justify-between items-center mb-2 text-sm font-medium">
+                                <span class="text-white">🇮🇩 Bahasa Indonesia</span>
+                                <span class="text-brand-indigo">Native</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                <div class="lang-fill h-full bg-gradient-to-r from-brand-indigo to-brand-cyan rounded-full transition-all duration-1000" data-width="100"></div>
+                            </div>
                         </div>
-                        <div class="lang-bar">
-                            <div class="lang-fill" data-width="100"></div>
-                        </div>
-                    </div>
-                    <div class="lang-item">
-                        <div class="lang-header">
-                            <span class="lang-name">🇬🇧 English</span>
-                            <span class="lang-level">Intermediate</span>
-                        </div>
-                        <div class="lang-bar">
-                            <div class="lang-fill" data-width="60"></div>
+                        <div class="lang-item">
+                            <div class="flex justify-between items-center mb-2 text-sm font-medium">
+                                <span class="text-white">🇬🇧 English</span>
+                                <span class="text-brand-cyan">Intermediate</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                <div class="lang-fill h-full bg-gradient-to-r from-brand-indigo to-brand-cyan rounded-full transition-all duration-1000" data-width="60"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,463 +227,442 @@
     </section>
 
     <!-- Experience Section -->
-    <section class="section section-alt" id="experience">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-briefcase"></i> Pengalaman</span>
-                <h2 class="section-title">Work Experience</h2>
+    <section class="section bg-[#0f0f1a]/40 py-24 px-6 relative z-10" id="experience">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center md:text-left">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-xs font-bold text-brand-cyan tracking-wider uppercase mb-3">
+                    <i class="fas fa-briefcase"></i> Pengalaman
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Work Experience</h2>
             </div>
-            <div class="timeline">
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
+            <div class="timeline relative max-w-3xl mx-auto">
+                
+                <div class="timeline-item animate-on-scroll mb-12 relative pl-12 md:pl-16">
+                    <div class="timeline-marker absolute left-0 top-1.5 w-6 h-6 flex items-center justify-center">
+                        <div class="timeline-dot w-4 h-4 rounded-full bg-brand-indigo ring-4 ring-brand-indigo/25"></div>
                     </div>
-                    <div class="timeline-card">
-                        <div class="timeline-badge">
-                            <i class="fas fa-hotel"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h3 class="timeline-title">IT Trainee</h3>
-                                <span class="timeline-company">Radisson Lampung Kedaton</span>
+                    <div class="timeline-card bg-white/[0.02] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-brand-indigo rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fas fa-hotel"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">IT Trainee</h3>
+                                    <span class="text-sm text-[#a0a0b8] font-medium">Radisson Lampung Kedaton</span>
+                                </div>
                             </div>
-                            <div class="timeline-meta">
-                                <span><i class="fas fa-calendar-alt"></i> Pengalaman Profesional</span>
-                                <span><i class="fas fa-map-pin"></i> Lampung, Indonesia</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Mengelola dan memelihara infrastruktur IT hotel</li>
-                                <li>Troubleshooting hardware dan software untuk operasional hotel</li>
-                                <li>Menangani jaringan dan sistem keamanan IT</li>
-                                <li>Berkolaborasi dengan tim untuk optimasi sistem</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">IT Infrastructure</span>
-                                <span class="tag">Networking</span>
-                                <span class="tag">Troubleshooting</span>
-                                <span class="tag">Hospitality Tech</span>
+                            <div class="text-left sm:text-right text-xs text-[#6a6a82]">
+                                <span class="block fw-bold"><i class="fas fa-calendar-alt me-1"></i> Pengalaman Profesional</span>
+                                <span class="block mt-1"><i class="fas fa-map-pin me-1"></i> Lampung, Indonesia</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-card">
-                        <div class="timeline-badge badge-blue">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h3 class="timeline-title">IT Support (Intern)</h3>
-                                <span class="timeline-company">BNN Sumatera Selatan</span>
-                            </div>
-                            <div class="timeline-meta">
-                                <span><i class="fas fa-calendar-alt"></i> Program Magang</span>
-                                <span><i class="fas fa-map-pin"></i> Palembang, Indonesia</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Memberikan dukungan teknis IT untuk operasional kantor</li>
-                                <li>Maintenance dan instalasi perangkat keras & lunak</li>
-                                <li>Mengelola jaringan lokal dan konektivitas internet</li>
-                                <li>Dokumentasi dan pelaporan sistem IT</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">IT Support</span>
-                                <span class="tag">Hardware</span>
-                                <span class="tag">Software</span>
-                                <span class="tag">Government IT</span>
-                            </div>
+                        <ul class="space-y-3 text-sm text-[#a0a0b8] leading-relaxed list-disc pl-5 mb-6">
+                            <li>Mengelola dan memelihara infrastruktur IT hotel</li>
+                            <li>Troubleshooting hardware dan software untuk operasional hotel</li>
+                            <li>Menangani jaringan dan sistem keamanan IT</li>
+                            <li>Berkolaborasi dengan tim untuk optimasi sistem</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo border border-white/5">IT Infrastructure</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo border border-white/5">Networking</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo border border-white/5">Troubleshooting</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo border border-white/5">Hospitality Tech</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="timeline-item animate-on-scroll mb-12 relative pl-12 md:pl-16">
+                    <div class="timeline-marker absolute left-0 top-1.5 w-6 h-6 flex items-center justify-center">
+                        <div class="timeline-dot w-4 h-4 rounded-full bg-brand-cyan ring-4 ring-brand-cyan/25"></div>
+                    </div>
+                    <div class="timeline-card bg-white/[0.02] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/20 text-brand-cyan rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">IT Support (Intern)</h3>
+                                    <span class="text-sm text-[#a0a0b8] font-medium">BNN Sumatera Selatan</span>
+                                </div>
+                            </div>
+                            <div class="text-left sm:text-right text-xs text-[#6a6a82]">
+                                <span class="block fw-bold"><i class="fas fa-calendar-alt me-1"></i> Program Magang</span>
+                                <span class="block mt-1"><i class="fas fa-map-pin me-1"></i> Palembang, Indonesia</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-sm text-[#a0a0b8] leading-relaxed list-disc pl-5 mb-6">
+                            <li>Memberikan dukungan teknis IT untuk operasional kantor</li>
+                            <li>Maintenance dan instalasi perangkat keras & lunak</li>
+                            <li>Mengelola jaringan lokal dan konektivitas internet</li>
+                            <li>Dokumentasi dan pelaporan sistem IT</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-cyan border border-white/5">IT Support</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-cyan border border-white/5">Hardware</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-cyan border border-white/5">Software</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-cyan border border-white/5">Government IT</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="section" id="projects">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-rocket"></i> Projects</span>
-                <h2 class="section-title">Featured Projects</h2>
+    <section class="section py-24 px-6 relative z-10" id="projects">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center md:text-left">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-pink/10 border border-brand-pink/20 text-xs font-bold text-brand-pink tracking-wider uppercase mb-3">
+                    <i class="fas fa-rocket"></i> Projects
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Featured Projects</h2>
             </div>
-            <div class="projects-grid">
-                <div class="project-card project-featured animate-on-scroll">
-                    <div class="project-glow"></div>
-                    <div class="project-header">
-                        <div class="project-icon">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Project 1 (Featured) -->
+                <div class="project-card relative bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 hover:-translate-y-1 transition-all duration-300 shadow-xl overflow-hidden group col-span-1 md:col-span-2 lg:col-span-3">
+                    <div class="project-glow absolute -inset-20 bg-[radial-gradient(circle,rgba(108,99,255,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-brand-indigo rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
                             <i class="fas fa-robot"></i>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link-btn" title="GitHub">
+                        <div class="flex items-center gap-2 relative z-10">
+                            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 text-[#a0a0b8] hover:text-white hover:bg-white/10 flex items-center justify-center transition-all" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" class="project-link-btn" title="Demo">
+                            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 text-[#a0a0b8] hover:text-white hover:bg-white/10 flex items-center justify-center transition-all" title="Demo">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
-                    <h3 class="project-title">AI Agent Data Analysis</h3>
-                    <p class="project-desc">
+                    <h3 class="text-xl font-bold text-white mb-3">AI Agent Data Analysis</h3>
+                    <p class="text-sm text-[#a0a0b8] mb-6 leading-relaxed">
                         Agen AI cerdas yang mampu melakukan analisis data secara otomatis. 
                         Menggunakan teknologi AI modern untuk mengekstrak insight dari dataset, 
                         melakukan visualisasi, dan memberikan rekomendasi berbasis data.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">LangFlow</span>
-                        <span class="tech-pill">AI/ML</span>
-                        <span class="tech-pill">LangChain</span>
-                        <span class="tech-pill">Data Analytics</span>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo">Python</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo">LangFlow</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo">AI/ML</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo">LangChain</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-indigo">Data Analytics</span>
                     </div>
-                    <div class="project-status">
-                        <span class="status-dot active"></span>
+                    <div class="flex items-center gap-2 text-xs text-[#a0a0b8]">
+                        <span class="w-2 h-2 rounded-full bg-brand-indigo animate-pulse"></span>
                         <span>Active Development</span>
                     </div>
                 </div>
 
-                <div class="project-card animate-on-scroll">
-                    <div class="project-glow"></div>
-                    <div class="project-header">
-                        <div class="project-icon icon-purple">
+                <!-- Project 2 -->
+                <div class="project-card relative bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 hover:-translate-y-1 transition-all duration-300 shadow-xl overflow-hidden group">
+                    <div class="project-glow absolute -inset-20 bg-[radial-gradient(circle,rgba(168,85,247,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-purple-500/10 border border-purple-500/20 text-brand-purple rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link-btn" title="GitHub">
+                        <div class="flex items-center gap-2 relative z-10">
+                            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 text-[#a0a0b8] hover:text-white hover:bg-white/10 flex items-center justify-center transition-all" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" class="project-link-btn" title="Demo">
+                            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 text-[#a0a0b8] hover:text-white hover:bg-white/10 flex items-center justify-center transition-all" title="Demo">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
-                    <h3 class="project-title">CV Information Extraction</h3>
-                    <p class="project-desc">
+                    <h3 class="text-lg font-bold text-white mb-3">CV Information Extraction</h3>
+                    <p class="text-sm text-[#a0a0b8] mb-6 leading-relaxed">
                         Sistem ekstraksi informasi otomatis dari CV/Resume menggunakan 
-                        AI dan NLP. Mampu mengidentifikasi dan mengekstrak data penting 
-                        seperti nama, pengalaman, skill, dan pendidikan secara akurat.
+                        AI dan NLP. Mampu mengidentifikasi dan mengekstrak data penting secara akurat.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-pill">LangFlow</span>
-                        <span class="tech-pill">NLP</span>
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">AI Extraction</span>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-purple">LangFlow</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-purple">NLP</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-purple">Python</span>
                     </div>
-                    <div class="project-status">
-                        <span class="status-dot active"></span>
+                    <div class="flex items-center gap-2 text-xs text-[#a0a0b8]">
+                        <span class="w-2 h-2 rounded-full bg-brand-purple animate-pulse"></span>
                         <span>Active Development</span>
                     </div>
                 </div>
 
-                <div class="project-card animate-on-scroll">
-                    <div class="project-glow"></div>
-                    <div class="project-header">
-                        <div class="project-icon icon-green">
+                <!-- Project 3 -->
+                <div class="project-card relative bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 hover:-translate-y-1 transition-all duration-300 shadow-xl overflow-hidden group">
+                    <div class="project-glow absolute -inset-20 bg-[radial-gradient(circle,rgba(0,200,150,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-green-500/10 border border-green-500/20 text-brand-green rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
                             <i class="fas fa-globe"></i>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link-btn" title="GitHub">
+                        <div class="flex items-center gap-2 relative z-10">
+                            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 text-[#a0a0b8] hover:text-white hover:bg-white/10 flex items-center justify-center transition-all" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
                         </div>
                     </div>
-                    <h3 class="project-title">Portfolio Website</h3>
-                    <p class="project-desc">
+                    <h3 class="text-lg font-bold text-white mb-3">Portfolio Website</h3>
+                    <p class="text-sm text-[#a0a0b8] mb-6 leading-relaxed">
                         Website portfolio personal yang dibangun dengan desain modern, 
-                        animasi yang halus, dan performa yang optimal. Menampilkan 
-                        seluruh karya dan pencapaian profesional.
+                        animasi yang halus, dan performa yang optimal untuk GitHub Pages.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-pill">HTML5</span>
-                        <span class="tech-pill">CSS3</span>
-                        <span class="tech-pill">JavaScript</span>
-                        <span class="tech-pill">GitHub Pages</span>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-green">HTML5</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-green">CSS3</span>
+                        <span class="px-2.5 py-1 bg-white/5 rounded-lg text-xs font-semibold text-brand-green">JavaScript</span>
                     </div>
-                    <div class="project-status">
-                        <span class="status-dot completed"></span>
+                    <div class="flex items-center gap-2 text-xs text-[#a0a0b8]">
+                        <span class="w-2 h-2 rounded-full bg-brand-green"></span>
                         <span>Completed</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Certifications Section -->
-    <section class="section section-alt" id="certifications">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-certificate"></i> Sertifikasi</span>
-                <h2 class="section-title">Certifications & Training</h2>
+    <section class="section bg-[#0f0f1a]/40 py-24 px-6 relative z-10" id="certifications">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center md:text-left">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold text-brand-orange tracking-wider uppercase mb-3">
+                    <i class="fas fa-certificate"></i> Sertifikasi
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Certifications & Training</h2>
             </div>
-            <div class="cert-grid">
-                <div class="cert-card animate-on-scroll">
-                    <div class="cert-logo">
-                        <i class="fab fa-cisco" style="color: #049fd9;"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="cert-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl flex items-center justify-between gap-6 hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-lg animate-on-scroll">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-blue-500/10 text-[#049fd9] border border-blue-500/20 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fab fa-cisco"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Cisco Networking Academy</h3>
+                            <p class="text-xs text-[#a0a0b8] font-semibold mt-1">Cisco</p>
+                            <p class="text-xs text-[#6a6a82] mt-1.5 leading-relaxed">Pelatihan jaringan komputer dan keamanan siber dari Cisco Networking Academy</p>
+                        </div>
                     </div>
-                    <div class="cert-info">
-                        <h3 class="cert-name">Cisco Networking Academy</h3>
-                        <p class="cert-issuer">Cisco</p>
-                        <p class="cert-desc">Pelatihan jaringan komputer dan keamanan siber dari Cisco Networking Academy</p>
-                    </div>
-                    <div class="cert-badge">
+                    <div class="cert-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold select-none flex-shrink-0">
                         <i class="fas fa-check-circle"></i>
                         <span>Verified</span>
                     </div>
                 </div>
 
-                <div class="cert-card animate-on-scroll">
-                    <div class="cert-logo">
-                        <i class="fab fa-ibm" style="color: #0f62fe;"></i>
+                <div class="cert-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl flex items-center justify-between gap-6 hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-lg animate-on-scroll">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-indigo-500/10 text-[#0f62fe] border border-indigo-500/20 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fab fa-ibm"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">IBM Professional Certificate</h3>
+                            <p class="text-xs text-[#a0a0b8] font-semibold mt-1">IBM</p>
+                            <p class="text-xs text-[#6a6a82] mt-1.5 leading-relaxed">Sertifikasi profesional dari IBM dalam bidang teknologi dan data</p>
+                        </div>
                     </div>
-                    <div class="cert-info">
-                        <h3 class="cert-name">IBM Professional Certificate</h3>
-                        <p class="cert-issuer">IBM</p>
-                        <p class="cert-desc">Sertifikasi profesional dari IBM dalam bidang teknologi dan data</p>
-                    </div>
-                    <div class="cert-badge">
+                    <div class="cert-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold select-none flex-shrink-0">
                         <i class="fas fa-check-circle"></i>
                         <span>Verified</span>
                     </div>
                 </div>
 
-                <div class="cert-card animate-on-scroll">
-                    <div class="cert-logo cert-logo-text">
-                        <span style="color: #2d9cdb; font-weight: 800; font-size: 1.5rem;">D</span>
+                <div class="cert-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl flex items-center justify-between gap-6 hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-lg animate-on-scroll">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-cyan-500/10 text-brand-cyan border border-cyan-500/20 rounded-2xl flex items-center justify-center text-2xl font-black flex-shrink-0">
+                            <span>D</span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Dicoding Academy</h3>
+                            <p class="text-xs text-[#a0a0b8] font-semibold mt-1">Dicoding Indonesia</p>
+                            <p class="text-xs text-[#6a6a82] mt-1.5 leading-relaxed">Pelatihan pengembangan software dan teknologi dari platform Dicoding Indonesia</p>
+                        </div>
                     </div>
-                    <div class="cert-info">
-                        <h3 class="cert-name">Dicoding Academy</h3>
-                        <p class="cert-issuer">Dicoding Indonesia</p>
-                        <p class="cert-desc">Pelatihan pengembangan software dan teknologi dari platform Dicoding Indonesia</p>
-                    </div>
-                    <div class="cert-badge">
+                    <div class="cert-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold select-none flex-shrink-0">
                         <i class="fas fa-check-circle"></i>
                         <span>Verified</span>
                     </div>
                 </div>
 
-                <div class="cert-card animate-on-scroll">
-                    <div class="cert-logo">
-                        <i class="fas fa-database" style="color: #f80000;"></i>
+                <div class="cert-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl flex items-center justify-between gap-6 hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-lg animate-on-scroll">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-red-500/10 text-red-500 border border-red-500/20 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Oracle Certification</h3>
+                            <p class="text-xs text-[#a0a0b8] font-semibold mt-1">Oracle</p>
+                            <p class="text-xs text-[#6a6a82] mt-1.5 leading-relaxed">Sertifikasi dari Oracle dalam bidang database dan cloud technology</p>
+                        </div>
                     </div>
-                    <div class="cert-info">
-                        <h3 class="cert-name">Oracle Certification</h3>
-                        <p class="cert-issuer">Oracle</p>
-                        <p class="cert-desc">Sertifikasi dari Oracle dalam bidang database dan cloud technology</p>
-                    </div>
-                    <div class="cert-badge">
+                    <div class="cert-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold select-none flex-shrink-0">
                         <i class="fas fa-check-circle"></i>
                         <span>Verified</span>
                     </div>
                 </div>
 
-                <div class="cert-card animate-on-scroll">
-                    <div class="cert-logo cert-logo-text">
-                        <span style="color: #ffc107; font-weight: 800; font-size: 1.4rem;">H8</span>
+                <div class="cert-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl flex items-center justify-between gap-6 hover:border-white/10 hover:bg-white/[0.04] transition-all shadow-lg animate-on-scroll md:col-span-2 md:max-w-xl md:mx-auto md:w-full">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 rounded-2xl flex items-center justify-center text-xl font-bold flex-shrink-0">
+                            <span>H8</span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Hacktiv8 Training</h3>
+                            <p class="text-xs text-[#a0a0b8] font-semibold mt-1">Hacktiv8</p>
+                            <p class="text-xs text-[#6a6a82] mt-1.5 leading-relaxed">Program pelatihan intensif dari Hacktiv8 dalam bidang teknologi dan programming</p>
+                        </div>
                     </div>
-                    <div class="cert-info">
-                        <h3 class="cert-name">Hacktiv8 Training</h3>
-                        <p class="cert-issuer">Hacktiv8</p>
-                        <p class="cert-desc">Program pelatihan intensif dari Hacktiv8 dalam bidang teknologi dan programming</p>
-                    </div>
-                    <div class="cert-badge">
+                    <div class="cert-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold select-none flex-shrink-0">
                         <i class="fas fa-check-circle"></i>
                         <span>Verified</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section" id="skills">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-tools"></i> Skills</span>
-                <h2 class="section-title">Technical Skills</h2>
+    <section class="section py-24 px-6 relative z-10" id="skills">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center md:text-left">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/20 text-xs font-bold text-brand-green tracking-wider uppercase mb-3">
+                    <i class="fas fa-tools"></i> Skills
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Technical Skills</h2>
             </div>
-            <div class="skills-grid">
-                <div class="skill-category animate-on-scroll">
-                    <div class="skill-cat-header">
-                        <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
-                        <h3>AI & Data</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-all duration-300 animate-on-scroll">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-indigo-500/10 text-brand-indigo rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-brain"></i></div>
+                        <h3 class="text-lg font-bold text-white">AI & Data</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-chip">
-                            <i class="fas fa-robot"></i>
-                            <span>AI Agent Development</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Data Analytics</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-project-diagram"></i>
-                            <span>LangFlow</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-link"></i>
-                            <span>LangChain</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-file-alt"></i>
-                            <span>NLP</span>
-                        </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-robot text-brand-indigo"></i> <span>AI Agent Development</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-chart-bar text-brand-indigo"></i> <span>Data Analytics</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-project-diagram text-brand-indigo"></i> <span>LangFlow</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-link text-brand-indigo"></i> <span>LangChain</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-file-alt text-brand-indigo"></i> <span>NLP</span></div>
                     </div>
                 </div>
 
-                <div class="skill-category animate-on-scroll">
-                    <div class="skill-cat-header">
-                        <div class="skill-cat-icon icon-blue"><i class="fas fa-code"></i></div>
-                        <h3>Programming</h3>
+                <div class="bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-all duration-300 animate-on-scroll">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-cyan-500/10 text-brand-cyan rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-code"></i></div>
+                        <h3 class="text-lg font-bold text-white">Programming</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-chip">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML5</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-database"></i>
-                            <span>SQL</span>
-                        </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-python text-brand-cyan"></i> <span>Python</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-html5 text-brand-cyan"></i> <span>HTML5</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-css3-alt text-brand-cyan"></i> <span>CSS3</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-js-square text-brand-cyan"></i> <span>JavaScript</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-database text-brand-cyan"></i> <span>SQL</span></div>
                     </div>
                 </div>
 
-                <div class="skill-category animate-on-scroll">
-                    <div class="skill-cat-header">
-                        <div class="skill-cat-icon icon-green"><i class="fas fa-server"></i></div>
-                        <h3>IT Infrastructure</h3>
+                <div class="bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-all duration-300 animate-on-scroll">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-green-500/10 text-brand-green rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-server"></i></div>
+                        <h3 class="text-lg font-bold text-white">IT Infrastructure</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-chip">
-                            <i class="fas fa-network-wired"></i>
-                            <span>Networking</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-desktop"></i>
-                            <span>IT Support</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-tools"></i>
-                            <span>Troubleshooting</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-hdd"></i>
-                            <span>Hardware</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Cybersecurity</span>
-                        </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-network-wired text-brand-green"></i> <span>Networking</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-desktop text-brand-green"></i> <span>IT Support</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-tools text-brand-green"></i> <span>Troubleshooting</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-hdd text-brand-green"></i> <span>Hardware</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-shield-alt text-brand-green"></i> <span>Cybersecurity</span></div>
                     </div>
                 </div>
 
-                <div class="skill-category animate-on-scroll">
-                    <div class="skill-cat-header">
-                        <div class="skill-cat-icon icon-orange"><i class="fas fa-cubes"></i></div>
-                        <h3>Tools & Platform</h3>
+                <div class="bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-all duration-300 animate-on-scroll">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-orange-500/10 text-brand-orange rounded-xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-cubes"></i></div>
+                        <h3 class="text-lg font-bold text-white">Tools & Platform</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-chip">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-linux"></i>
-                            <span>Linux</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-windows"></i>
-                            <span>Windows Server</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fas fa-cloud"></i>
-                            <span>Cloud Services</span>
-                        </div>
-                        <div class="skill-chip">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-github text-brand-orange"></i> <span>GitHub</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-linux text-brand-orange"></i> <span>Linux</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-windows text-brand-orange"></i> <span>Windows Server</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fas fa-cloud text-brand-orange"></i> <span>Cloud Services</span></div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-xl border border-white/5 text-xs text-[#a0a0b8]"><i class="fab fa-git-alt text-brand-orange"></i> <span>Git</span></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section section-alt" id="contact">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag"><i class="fas fa-envelope"></i> Kontak</span>
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Tertarik untuk berkolaborasi atau ingin tahu lebih lanjut? Jangan ragu untuk menghubungi saya.</p>
+    <section class="section bg-[#0f0f1a]/40 py-24 px-6 relative z-10" id="contact">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-header animate-on-scroll mb-16 text-center">
+                <span class="section-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-pink/10 border border-brand-pink/20 text-xs font-bold text-brand-pink tracking-wider uppercase mb-3">
+                    <i class="fas fa-envelope"></i> Kontak
+                </span>
+                <h2 class="section-title text-3xl md:text-4xl font-extrabold text-white">Let's Connect</h2>
+                <p class="text-sm text-[#a0a0b8] mt-4 max-w-md mx-auto leading-relaxed">Tertarik untuk berkolaborasi atau ingin tahu lebih lanjut? Jangan ragu untuk menghubungi saya melalui kontak di bawah ini.</p>
             </div>
-            <div class="contact-grid animate-on-scroll">
-                <a href="mailto:redhoilhamdi@gmail.com" class="contact-card">
-                    <div class="contact-icon">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
+                
+                <a href="mailto:redhoilhamdi@gmail.com" class="contact-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center gap-4 shadow-lg group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 text-white rounded-2xl flex items-center justify-center text-xl group-hover:text-brand-indigo group-hover:bg-indigo-500/10 group-hover:border-brand-indigo/25 transition-all">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3>Email</h3>
-                    <p>redhoilhamdi@gmail.com</p>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Email</h3>
+                        <p class="text-xs text-[#a0a0b8] mt-1 break-all">redhoilhamdi@gmail.com</p>
+                    </div>
                 </a>
-                <a href="https://github.com/ilhamdho12" target="_blank" class="contact-card">
-                    <div class="contact-icon icon-github">
+
+                <a href="https://github.com/ilhamdho12" target="_blank" class="contact-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center gap-4 shadow-lg group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 text-white rounded-2xl flex items-center justify-center text-xl group-hover:text-white group-hover:bg-white/10 group-hover:border-white/20 transition-all">
                         <i class="fab fa-github"></i>
                     </div>
-                    <h3>GitHub</h3>
-                    <p>github.com/ilhamdho12</p>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">GitHub</h3>
+                        <p class="text-xs text-[#a0a0b8] mt-1">github.com/ilhamdho12</p>
+                    </div>
                 </a>
-                <a href="https://linkedin.com/in/ilhamdho12" target="_blank" class="contact-card">
-                    <div class="contact-icon icon-linkedin">
+
+                <a href="https://linkedin.com/in/ilhamdho12" target="_blank" class="contact-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center gap-4 shadow-lg group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 text-white rounded-2xl flex items-center justify-center text-xl group-hover:text-[#0077b5] group-hover:bg-blue-500/10 group-hover:border-blue-500/25 transition-all">
                         <i class="fab fa-linkedin-in"></i>
                     </div>
-                    <h3>LinkedIn</h3>
-                    <p>linkedin.com/in/ilhamdho12</p>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">LinkedIn</h3>
+                        <p class="text-xs text-[#a0a0b8] mt-1">linkedin.com/in/ilhamdho12</p>
+                    </div>
                 </a>
-                <a href="https://instagram.com/ilhamdho12" target="_blank" class="contact-card">
-                    <div class="contact-icon icon-instagram">
+
+                <a href="https://instagram.com/ilhamdho12" target="_blank" class="contact-card bg-white/[0.02] border border-white/5 p-6 rounded-3xl hover:border-white/10 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center gap-4 shadow-lg group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 text-white rounded-2xl flex items-center justify-center text-xl group-hover:text-brand-pink group-hover:bg-pink-500/10 group-hover:border-brand-pink/25 transition-all">
                         <i class="fab fa-instagram"></i>
                     </div>
-                    <h3>Instagram</h3>
-                    <p>@ilhamdho12</p>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Instagram</h3>
+                        <p class="text-xs text-[#a0a0b8] mt-1">@ilhamdho12</p>
+                    </div>
                 </a>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-bracket">&lt;</span>RI<span class="logo-bracket">/&gt;</span>
-                </div>
-                <p class="footer-text">
-                    Designed & Built by <strong>Redho Ilhamdi</strong>
-                </p>
-                <div class="footer-social">
-                    <a href="https://github.com/ilhamdho12" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/ilhamdho12" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://instagram.com/ilhamdho12" target="_blank"><i class="fab fa-instagram"></i></a>
-                </div>
-                <p class="footer-copyright">
-                    &copy; 2026 Redho Ilhamdi. All rights reserved.
-                </p>
+    <footer class="border-t border-white/5 bg-[#0a0a0f]/80 backdrop-blur-md relative z-10 px-6 py-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/5 pb-8 mb-8">
+            <div class="font-mono text-2xl font-bold tracking-tight">
+                <span class="text-brand-indigo">&lt;</span>RI<span class="text-brand-indigo">/&gt;</span>
+            </div>
+            <p class="text-[#a0a0b8] text-sm text-center md:text-right">Designed & Built by <strong class="text-white">Redho Ilhamdi</strong></p>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/ilhamdho12" target="_blank" class="text-[#a0a0b8] hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/ilhamdho12" target="_blank" class="text-[#a0a0b8] hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/ilhamdho12" target="_blank" class="text-[#a0a0b8] hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
+        <p class="text-center text-xs text-[#6a6a82]">&copy; 2026 Redho Ilhamdi. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>

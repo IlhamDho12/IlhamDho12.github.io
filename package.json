@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-redho",
+  "version": "1.0.0",
+  "description": "Portfolio Redho Ilhamdi - IT Professional",
+  "scripts": {
+    "dev": "npx -y serve -l 3002 -s ."
+  }
+}
