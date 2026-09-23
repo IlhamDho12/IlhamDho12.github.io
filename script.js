@@ -152,10 +152,10 @@ function updateActiveNav() {
 // TYPING EFFECT
 // ============================================
 const roles = [
-    'IT Professional',
+    'IT Support & Operations',
+    'Administrative Specialist',
+    'Data & Operations',
     'AI Enthusiast',
-    'Data Analyst',
-    'IT Support Specialist',
     'Problem Solver'
 ];
 
